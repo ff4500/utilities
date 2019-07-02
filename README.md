@@ -1,2 +1,1 @@
-# utilities
-Scripts and stuff that I use to do various things
+Hi. This repo contains scripts and other stuff that I use to do various things. There _should_ be a README in each directory with some documentation on each script. If there isn't one, let me know and I'll get to it.
