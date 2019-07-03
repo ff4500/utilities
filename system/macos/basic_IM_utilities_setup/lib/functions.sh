@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function install_homebrew() {
+function check_homebrew() {
   brew_check=$(command -v brew) > /dev/null 2>&1
 
   if [[ $? != 0 ]]; then
@@ -26,8 +26,8 @@ function install_homebrew() {
   fi
 }
 
-function install_brewcask() {
-  output=$(command -v brew cask --version) > /dev/null 2>&1
+function check_brewcask() {
+  cask_check=$(command -v brew cask --version) > /dev/null 2>&1
   if [[ $? != 0 ]]; then
     echo -e "brew-cask is not installed"
   else
@@ -35,8 +35,35 @@ function install_brewcask() {
   fi
 }
 
+function check_iterm2 () {
+  iterm_check=$(echo $TERM_PROGRAM) > /dev/null 2>&1
+  if [[ $? != 0 ]]; then
+    echo -e "You don't have iterm2 installed. Installing..."
+    require_cask iterm2
+  else
+    echo -e "iterm2 is already installed. Moving on."
+  fi
+}
 
+function check_atom () {
+  atom_check=$(command -v atom) > /dev/null 2>&1
+  if [[ $? != 0 ]]; then
+    echo -e "You don't have Atom installed. Installing..."
+    require_cask atom
+  else
+    echo -e "Atom is already installed. Moving on."
+  fi
+}
 
+function check_im () {
+  im_check=$(command -v convert) > /dev/null 2>&1
+  if [[ $? != 0 ]]; then
+    echo -e "You don't have ImageMagick installed. Installing..."
+    require_brew imagemagick
+  else
+    echo -e "ImageMagick is already installed. Moving on."
+  fi
+}
 
 
 # source ./echos.sh

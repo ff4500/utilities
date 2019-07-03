@@ -19,5 +19,24 @@ opening_title
 
 # Install Homebrew
 # ----------------------------------------------------------------
-running "Checking homebrew..."
-install_homebrew
+running "Checking on Homebrew..."
+check_homebrew
+
+seperator
+
+# Install Homebrew Cask (for non-brew applications)
+# ----------------------------------------------------------------
+running "Checking on Homebrew Casks..."
+check_brewcask
+
+seperator
+
+check_iterm2
+
+seperator
+
+check_atom
+
+seperator
+
+check_im

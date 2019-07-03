@@ -8,13 +8,11 @@ if [ ! -d "$output_dir" ]; then
   mkdir -p "$output_dir"
 fi
 
-for notpornimages in $input_dir/*.{$exts} ; do
-
+for notpornimages in $input_dir/*."{$exts}" ; do
   convert "$notpornimages" \
     -thumbnail 250x250^ \
     -gravity center \
     -extent 250x250 \
     -set filename:fname '%t_thumb' \
     "$output_dir"/'%[filename:fname].jpg'
-
 done

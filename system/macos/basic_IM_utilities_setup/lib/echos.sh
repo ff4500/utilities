@@ -1,28 +1,31 @@
 #!//bin/bash
 
-###
-# some colorized echo helpers
-# @author Adam Eivy
-# https://raw.githubusercontent.com/atomantic/dotfiles/master/lib_sh/echos.sh
-###
+# ---------------------------------------------------------------------------- #
+#   Colorized echo helpers and functions
+#   Original work based on the echos.sh script by @author Adam Eivy:
+#   https://github.com/atomantic/dotfiles/blob/master/lib_sh/echos.sh
+# ---------------------------------------------------------------------------- #
 
 # Colors
+# ----------------------------------------------------------------
 ESC_SEQ="\x1b["
-COL_RESET=$ESC_SEQ"39;49;00m"
-COL_RED=$ESC_SEQ"31;01m"
-COL_GREEN=$ESC_SEQ"32;01m"
-COL_YELLOW=$ESC_SEQ"33;01m"
-COL_BLUE=$ESC_SEQ"34;01m"
-COL_MAGENTA=$ESC_SEQ"35;01m"
-COL_CYAN=$ESC_SEQ"36;01m"
-SEP_COLOR=$ESC_SEQ"36;01m"
+COL_RESET=${ESC_SEQ}"39;49;00m"
+COL_RED=${ESC_SEQ}"31;01m"
+COL_GREEN=${ESC_SEQ}"32;01m"
+COL_YELLOW=${ESC_SEQ}"33;01m"
+COL_BLUE=${ESC_SEQ}"34;01m"
+COL_MAGENTA=${ESC_SEQ}"35;01m"
+COL_CYAN=${ESC_SEQ}"36;01m"
+SEP_COLOR=${ESC_SEQ}"36;01m"
 
-COL_DIM=$ESC_SEQ"2;49;90m"
-SEP_COLOR_DIM=$ESC_SEQ"38;5;8m"
-DIMDOTS=$ESC_SEQ"2;49;90m..."$COL_RESET
+COL_DIM=${ESC_SEQ}"2;49;90m"
+SEP_COLOR_DIM=${ESC_SEQ}"38;5;8m"
+DIMDOTS=${ESC_SEQ}"2;49;90m..."${COL_RESET}
 
-COL_PURPLE_BG=$ESC_SEQ"38;2;0;0;0m"$ESC_SEQ"48;2;110;0;255m"
+COL_PURPLE_BG=${ESC_SEQ}"38;2;0;0;0m"${ESC_SEQ}"48;2;110;0;255m"
 
+# Variables
+# ----------------------------------------------------------------
 columns="$(tput cols)"
 ov_sep="-------------------------------------------------"
 open_vers_1="MacOS install script - v0.0.1"
