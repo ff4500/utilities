@@ -1,4 +1,4 @@
-#!//bin/bash
+#!/usr/bin/env bash
 
 # ---------------------------------------------------------------------------- #
 #   Colorized echo helpers and functions

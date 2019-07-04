@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function check_homebrew() {
   brew_check=$(command -v brew) > /dev/null 2>&1

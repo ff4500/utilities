@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 input_dir="$HOME/Desktop/Definitely_NOT_Porn"
 exts="jpg,jpeg,JPG,png,gif"
