@@ -87,4 +87,5 @@ run() {
   sep
   indent; echo "Yay"
   sep
+  echo
 }
