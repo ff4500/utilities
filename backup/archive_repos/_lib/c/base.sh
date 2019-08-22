@@ -70,15 +70,11 @@ function print_ff() {
   echo
   for var in "${!fg_@}"; do
     #printf '%s=%s\n' "$var" "${!var}"
-    indent;
-    indent;
-    printf "${ind}${ind}${var} ${fg_lightgrey}(%s)${reset}: ${esc_seq_fg}${!var}${var}${reset}\n" "${!var:10}"
+    indent; indent; printf "${var} ${fg_lightgrey}(%s)${reset}: ${esc_seq_fg}${!var}${var}${reset}\n" "${!var:10}"
   done
   echo
   for var in "${!bg_@}"; do
-    indent;
-    indent;
-    printf "${indent}${indent}${var}: ${!var} ${var} ${reset}\n"
+    indent; indent; printf "${var}: ${!var} ${var} ${reset}\n"
   done
   echo
   echo -e "${fg_darkgrey_01}  --------------------------------------------------------  ${reset}"
