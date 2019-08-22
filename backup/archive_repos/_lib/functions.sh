@@ -16,33 +16,43 @@ sep() {
   #echo -e "-----------------------------------------------------------------------------"
 }
 
+aaa() {
+  echo -e "${fg_darkgrey_01}  --------------------------------------------------------  ${reset}"
+}
+
 # Check directory existence
 # -----------------------------------------------
+aaa
+echo
 
 if [ ! -d "${base_dir}" ]; then
-  echo -e "Base dir doesn't exist. Making it now."
-  echo -e "mkdir ${base_dir}"
+  indent; indent; echo -e "Base dir doesn't exist. Making it now."
+  indent; indent; echo -e "> mkdir ${base_dir}"
+  echo
   #mkdir ${source}
 else
   echo -e "Base dir exists at ${base_dir}"
 fi
 
 if [ ! -d "${source}" ]; then
-  echo -e "Source dir doesn't exist. Making it now."
-  echo -e "mkdir ${source}"
+  indent; indent; echo -e "Source dir doesn't exist. Making it now."
+  indent; indent; echo -e "> mkdir ${source}"
+  echo
   #mkdir ${source}
 else
   echo -e "Source dir exists at ${source}"
 fi
 
 if [ ! -d "${output}" ]; then
-  echo -e "Output dir doesn't exist. Making it now."
-  echo -e "mkdir ${output}"
+  indent; indent; echo -e "Output dir doesn't exist. Making it now."
+  indent; indent; echo -e "> mkdir ${output}"
   #mkdir ${output}
 else
   echo -e "Output dir exists at ${output}"
 fi
 
+echo
+aaa
 
 # # Clone everything in repo_list to source folder
 # # -----------------------------------------------
@@ -103,8 +113,13 @@ zzz (){
 #zzz
 
 run() {
+  echo
   sep
   indent; echo "Yay"
   sep
+  echo
+  aaa
+  indent; indent; echo "YAY!"
+  aaa
   echo
 }
