@@ -5,6 +5,8 @@ if [ $path = 'c' ]; then
   source ./esc.sh
 fi
 
+source ./_lib/functions.sh
+
 # FF colors
 # ------------------------------------------------------------------------------
 # ff4500 - #ff4500
@@ -62,20 +64,24 @@ bg_lightpurple_w_blk="${esc_seq_fg}${c_black}${esc_seq_bg}${base_lightpurple}"
 function print_ff() {
   clear
   echo
-  echo -e "${fg_darkgrey_01}------------------------------------------------------------${reset}"
+  echo -e "${fg_darkgrey_01}  -------------------------------------------------------  ${reset}"
   echo
-  echo -e "${indent}${indent}${bg_darkpurple} Base colors: ${reset}"
+  indent; indent; echo -e "${bg_darkpurple} Base colors: ${reset}"
   echo
   for var in "${!fg_@}"; do
     #printf '%s=%s\n' "$var" "${!var}"
-    printf "${var} ${fg_lightgrey}(%s)${reset}: ${esc_seq_fg}${!var}${var}${reset}\n" "${!var:10}"
+    indent;
+    indent;
+    printf "${ind}${ind}${var} ${fg_lightgrey}(%s)${reset}: ${esc_seq_fg}${!var}${var}${reset}\n" "${!var:10}"
   done
   echo
   for var in "${!bg_@}"; do
-    printf "${var}: ${!var} ${var} ${reset}\n"
+    indent;
+    indent;
+    printf "${indent}${indent}${var}: ${!var} ${var} ${reset}\n"
   done
   echo
-  echo -e "${fg_darkgrey_01}------------------------------------------------------------${reset}"
+  echo -e "${fg_darkgrey_01}  --------------------------------------------------------  ${reset}"
   echo
 }
 if [ $path = 'c' ]; then
