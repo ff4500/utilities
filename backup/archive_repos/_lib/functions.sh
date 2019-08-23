@@ -11,8 +11,8 @@ indent() {
 # -----------------------------------------------
 sep() {
   local ch="-"
-  local sep_line="$(printf '%*s' "60" | tr ' ' "$ch")"
-  echo -e "${indent}${grey}${sep_line}${reset}${indent}"
+  local sep_line="$(printf '%*s' "56" | tr ' ' "$ch")"
+  echo -e "${ind}${fg_darkgrey_01}${sep_line}${reset}${ind}"
   #echo -e "-----------------------------------------------------------------------------"
 }
 
@@ -20,39 +20,81 @@ aaa() {
   echo -e "${fg_darkgrey_01}  --------------------------------------------------------  ${reset}"
 }
 
-# Check directory existence
+info(){
+  indent; indent; echo -e "${bg_darkgrey_02}${ui_text_info} i ${reset} \c"
+}
+
+cmd(){
+  indent; indent; echo -e "${bg_darkgrey_02}   ${reset}"
+  indent; indent; echo -e "${bg_darkgrey_02}${ui_text_cmd} > ${reset}${fg_darkgrey_01} \$ ${reset}\c"
+}
+
+sec_hl(){
+  indent; indent; echo -e "${bg_lightpurple} $1 ${reset}";
+  echo
+}
+
+line(){
+  echo -e $1
+}
+
+line_2(){
+  indent; indent; echo -e "${bg_darkgrey_02}   ${reset} \c"; echo -e $1
+}
+
+# Check directory/file existence
 # -----------------------------------------------
-aaa
-echo
 
-if [ ! -d "${base_dir}" ]; then
-  indent; indent; echo -e "Base dir doesn't exist. Making it now."
-  indent; indent; echo -e "> mkdir ${base_dir}"
+check_ex(){
   echo
-  #mkdir ${source}
-else
-  echo -e "Base dir exists at ${base_dir}"
-fi
-
-if [ ! -d "${source}" ]; then
-  indent; indent; echo -e "Source dir doesn't exist. Making it now."
-  indent; indent; echo -e "> mkdir ${source}"
+  sep
   echo
-  #mkdir ${source}
-else
-  echo -e "Source dir exists at ${source}"
-fi
 
-if [ ! -d "${output}" ]; then
-  indent; indent; echo -e "Output dir doesn't exist. Making it now."
-  indent; indent; echo -e "> mkdir ${output}"
-  #mkdir ${output}
-else
-  echo -e "Output dir exists at ${output}"
-fi
+  sec_hl "Checking for required files/folders:"
 
-echo
-aaa
+  if [ ! -d "${base_dir}" ]; then
+    info; line "${fg_lightgrey}Base dir${reset} doesn't exist."; line_2 "Making it now."
+    cmd; line "${fg_lightgrey}mkdir ${base_dir}${reset}"
+    echo; sleep 1
+    mkdir ${base_dir}
+  else
+    info; line "Base dir exists at ${ui_text_cmd}${base_dir}${reset}"
+    echo
+  fi
+
+  if [ ! -d "${source}" ]; then
+    info; line "${fg_lightgrey}Source dir${reset} doesn't exist."; line_2 "Making it now."
+    cmd; line "${fg_lightgrey}mkdir ${source}${reset}"
+    echo; sleep 1
+    mkdir ${source}
+  else
+    info; line "Source dir exists at ${ui_text_cmd}${source}${reset}"
+    echo
+  fi
+
+  if [ ! -d "${output}" ]; then
+    info; line "${fg_lightgrey}Output dir${reset} doesn't exist."; line_2 "Making it now."
+    cmd; line "${fg_lightgrey}mkdir ${output}${reset}"
+    echo; sleep 1
+    mkdir ${output}
+  else
+    info; line "Output dir exists at ${ui_text_cmd}${output}${reset}"
+    echo
+  fi
+
+  if [ ! -f "${repo_list}" ]; then
+    info; line "A ${fg_lightgrey}repository list${reset} doesn't exist."; line_2 "Making the ${ui_text_cmd}_src${reset} dir and an empty list now."
+    cmd; line "${fg_lightgrey}touch ${repo_list}${reset}"
+    echo; sleep 1
+    mkdir ${base_dir}/_src && touch ${repo_list}
+  else
+    info; line "A repository list exists at ${ui_text_cmd}${repo_list}${reset}"
+    echo
+  fi
+
+  echo
+  sep
+}
 
 # # Clone everything in repo_list to source folder
 # # -----------------------------------------------
@@ -85,6 +127,7 @@ aaa
 # -----------------------------------------------
 
 zzz (){
+  filelines="$(cat $repo_list)"
   for line in $filelines; do
     suffix=".git"
     pre="${line##*/}"
@@ -113,9 +156,10 @@ zzz (){
 #zzz
 
 run() {
+  check_ex
   echo
   sep
-  indent; echo "Yay"
+  indent; indent; echo "Yay"
   sep
   echo
   aaa

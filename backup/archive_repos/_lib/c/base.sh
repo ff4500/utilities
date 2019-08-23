@@ -27,6 +27,8 @@ base_lightgrey="120;120;120m"
 base_darkgrey_01="60;60;60m"
 base_darkgrey_02="50;50;50m"
 base_black="0;0;0m"
+base_lime="0;255;0m"
+base_aqua="0;255;255m"
 
 l_grey_rgb="120;120;120m"
 m_grey_rgb="80;80;80m"
@@ -42,6 +44,8 @@ d_lightgrey="${esc_seq_fg}${base_lightgrey}"
 fg_darkgrey_01="${esc_seq_fg}${base_darkgrey_01}"
 fg_darkgrey_02="${esc_seq_fg}${base_darkgrey_02}"
 fg_black="${esc_seq_fg}${base_black}"
+fg_lime="${esc_seq_fg}${base_lime}"
+fg_aqua="${esc_seq_fg}${base_aqua}"
 
 # Named background colors
 # ------------------------------------------------------------------------------
@@ -52,6 +56,8 @@ bg_lightgrey="${esc_seq_fg}${c_white}${esc_seq_bg}${base_lightgrey}"
 bg_darkgrey_01="${esc_seq_fg}${c_white}${esc_seq_bg}${base_darkgrey_01}"
 bg_darkgrey_02="${esc_seq_fg}${c_white}${esc_seq_bg}${base_darkgrey_02}"
 bg_black="${esc_seq_fg}${c_white}${esc_seq_bg}${base_black}"
+bg_lime="${esc_seq_fg}${c_white}${esc_seq_bg}${base_lime}"
+bg_aqua="${esc_seq_fg}${c_white}${esc_seq_bg}${base_aqua}"
 
 # Color variations and special use cases
 # ------------------------------------------------------------------------------
