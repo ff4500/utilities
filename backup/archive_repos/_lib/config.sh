@@ -14,6 +14,11 @@ source_repo_dir="repos"
 output_dir="archive"
 repo_list="${base_dir}/_src/repo_list.txt"
 
+# Other config things
+# ------------------------------------------------------------------------------
+title="Repo archiving utility v0.01"
+
+
 # Variables for functions - Don't mess with these
 # ------------------------------------------------------------------------------
 source="${base_dir}/${source_repo_dir}"
