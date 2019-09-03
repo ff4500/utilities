@@ -154,10 +154,14 @@ repo_list_empty_check(){
   sep
   echo
 
-  sec_hl "Checking for repositories in your list:"
+  sec_hl "Checking for repositories:"
 
   if [ ! -s "${repo_list}" ]; then
-    alert_line "There aren't any repos defined in your list yet."; line_2 "Add them to ${fg_aqua}${repo_list}${reset}"
+    alert_line "There aren't any repos defined in your list yet."; line_2 "Add them to ${fg_aqua}${repo_list}${reset}"; line_2 "and restart this script."
+    echo
+    sep
+    echo
+    sleep 2s;
     exit 0;
   else
     info; line "Here's what you have in you list now:"
