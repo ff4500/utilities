@@ -11,15 +11,15 @@ is_external_link: false
 publication: ""
 externallink: ""
 
-background_color: "" # Hex color - ex: #fc4c02
+background_color: ""
 
 featured: false
 featured_sm: false
 highlighted: false
 
-featured_image: /assets/images/posts/zzz/processed/zzz-image_feature
-featured_sm_image: /assets/images/posts/zzz/processed/zzz-image_feature_sm
-highlighted_image: /assets/images/posts/zzz/processed/zzz-image_highlight
+featured_image: 
+featured_sm_image: 
+highlighted_image: 
 neu_image_extension: 'jpg'
 
 jumbotron_image: /assets/images/posts/zzz/processed/zzz-jumbotron
