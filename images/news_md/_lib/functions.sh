@@ -52,6 +52,7 @@ cp_templates() {
     cp "${template_dir}/news_template.md" "${news_dir}/${file_dir}/${file_dir}.md"
     cp "${template_dir}/template.psd" "${news_dir}/${file_dir}/${file_dir}_template.psd"
   fi
+  mkdir "${news_dir}/${file_dir}/source"
 }
 
 # -----
@@ -60,5 +61,13 @@ run() {
   mk_news
   mk_folder
   cp_templates
-  echo -e "yay!"
+  echo
+  echo -e "------------------------------------------------------------"
+  echo
+  echo -e "  Your news article directory is ready!"
+  echo
+  echo -e "  Check it out here:"
+  echo -e "  ${news_dir}/${file_dir}"
+  echo
+  echo -e "------------------------------------------------------------"
 }
