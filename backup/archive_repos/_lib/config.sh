@@ -16,7 +16,7 @@ repo_list="${base_dir}/_src/repo_list.txt"
 
 # Other config things
 # ------------------------------------------------------------------------------
-title="Repo archiving utility v0.01"
+title="Repo archiving utility v0.02"
 
 
 # Variables for functions - Don't mess with these

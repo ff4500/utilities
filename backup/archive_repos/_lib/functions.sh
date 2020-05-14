@@ -41,11 +41,11 @@ line_i(){
 }
 
 line_2(){
-  indent; indent; echo -e "${bg_darkgrey_02}   ${reset} \c"; echo -e $1
+  indent; indent; echo -e "    \c"; echo -e $1
 }
 
 alert_line(){
-  indent; indent; echo -e "${bg_darkgrey_02}${fg_red} ! ${reset} \c"; echo -e "${fg_red}$1${reset}"
+  indent; indent; echo -e "${bg_red}${fg_darkgrey_02} ! ${reset} \c"; echo -e "${fg_red}$1${reset}"
 }
 
 titleblock() {
