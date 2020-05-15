@@ -17,7 +17,7 @@ ui_text_muted="${fg_lightgrey}"
 ui_dialog_bg="${bg_darkgrey_01}"
 ui_highlight_bg="${bg_ff4500}"
 ui_text_info="${fg_lime}"
-ui_text_cmd="${fg_aqua}"
+ui_text_cmd="${fg_lime}"
 
 # for var in "${!ui_@}"; do
 #   printf '%s=%s\n' "$var" "${!var}"

@@ -22,9 +22,14 @@ info(){
 }
 
 cmd(){
-  indent; indent; echo -e "${bg_darkgrey_02}   ${reset}"
-  indent; indent; echo -e "${bg_darkgrey_02}${ui_text_cmd} > ${reset}${fg_lightgrey} \$ ${reset}\c"
-  echo -e "${fg_lightgrey}$1${reset}"
+  # indent; indent; echo -e "${bg_darkgrey_02}   ${reset}"
+  # echo;
+  # indent; indent; echo -e "${bg_darkgrey_02}${ui_text_cmd} > ${reset}${fg_lightgrey} \$ ${reset}\c"
+  indent; indent; indent; indent; echo -e "${bg_black}${ui_text_cmd} \$ $1 ${reset}"
+}
+
+cmd_inline(){
+  echo -e "${bg_black}${ui_text_cmd} \$ $1 ${reset}"
 }
 
 sec_hl(){
@@ -45,7 +50,7 @@ line_2(){
 }
 
 alert_line(){
-  indent; indent; echo -e "${bg_red}${fg_darkgrey_02} ! ${reset} \c"; echo -e "${fg_red}$1${reset}"
+  indent; indent; echo -e "${bg_red}${fg_white} ! ${reset} \c"; echo -e "${fg_red}$1${reset}"
 }
 
 titleblock() {
@@ -75,42 +80,42 @@ check_ex(){
   sec_hl "Checking for required files/folders:"
 
   if [ ! -d "${base_dir}" ]; then
-    alert_line "Base dir doesn't exist."; line_2 "Making it now."
-    cmd "mkdir ${base_dir}"
+    alert_line "Base dir doesn't exist. ${reset}"; sleep 1;
+    line_2 "Making it now. \c"; sleep 1; cmd_inline "mkdir ${base_dir}"
     echo; sleep 1
     mkdir ${base_dir}
   else
-    info; line "Base dir exists at:"; line_2 "${ui_text_cmd}${base_dir}${reset}"
+    info; line "Base dir exists at: ${ui_text_cmd}${base_dir}${reset}"
     echo
   fi
 
   if [ ! -d "${source}" ]; then
-    alert_line "Source dir doesn't exist."; line_2 "Making it now."
-    cmd "mkdir ${source}"
+    alert_line "Source dir doesn't exist. ${reset}"; sleep 1;
+    line_2 "Making it now. \c"; sleep 1; cmd_inline "mkdir ${source}"
     echo; sleep 1
     mkdir ${source}
   else
-    info; line "Source dir exists at:"; line_2 "${ui_text_cmd}${source}${reset}"
+    info; line "Source dir exists at: ${ui_text_cmd}${source}${reset}"
     echo
   fi
 
   if [ ! -d "${output}" ]; then
-    alert_line "Output dir doesn't exist."; line_2 "Making it now."
-    cmd "mkdir ${output}"
+    alert_line "Output dir doesn't exist. ${reset}"; sleep 1;
+    line_2 "Making it now. \c"; sleep 1; cmd_inline "mkdir ${output}"
     echo; sleep 1
     mkdir ${output}
   else
-    info; line "Output dir exists at:"; line_2 "${ui_text_cmd}${output}${reset}"
+    info; line "Output dir exists at: ${ui_text_cmd}${output}${reset}"
     echo
   fi
 
   if [ ! -f "${repo_list}" ]; then
-    alert_line "A repository list doesn't exist."; line_2 "Making the ${bg_aqua} _src ${reset} dir and an empty list now."
-    cmd "touch ${repo_list}"
+    alert_line "A repository list doesn't exist. ${reset}"; sleep 1;
+    line_2 "Making the ${bg_aqua} _src ${reset} dir and an empty list now. \c"; sleep 1; cmd_inline "touch ${repo_list}"
     echo; sleep 1
     mkdir ${base_dir}/_src && touch ${repo_list}
   else
-    info; line "A repository list exists at:"; line_2 "${ui_text_cmd}${repo_list}${reset}"
+    info; line "A repository list exists at: ${ui_text_cmd}${repo_list}${reset}"
     echo
   fi
 
