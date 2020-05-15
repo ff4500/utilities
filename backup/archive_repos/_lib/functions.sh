@@ -131,6 +131,7 @@ check_ex(){
     line_2 "Making the ${bg_aqua} _src ${reset} dir and an empty list now. \c"; sleep 1; cmd_inline "touch ${repo_list}"
     echo; sleep 1
     mkdir ${base_dir}/_src && touch ${repo_list}
+    # mkdir ${base_dir}/_src; echo -e "# put the URL for your repo(s) here.\n# ex: https://github.com/youruser/yourrepo.git\n" > ${repo_list};
   else
     info; line "A repository list exists at: \c"; cmd_inline_noprompt "${repo_list}"
     echo
