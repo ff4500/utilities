@@ -9,7 +9,7 @@
 
 # User specified directories (no trailing slashes!)
 # ------------------------------------------------------------------------------
-base_dir="$HOME/Desktop/test"
+base_dir="$HOME/Desktop/repo_archive"
 source_repo_dir="repos"
 output_dir="archive"
 repo_list="${base_dir}/_src/repo_list.txt"
