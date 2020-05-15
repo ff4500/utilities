@@ -91,6 +91,7 @@ function print_ff() {
   echo
   echo -e "${fg_darkgrey_01}  --------------------------------------------------------  ${reset}"
   echo
+  prompt_continue
 }
 if [ $path = 'c' ]; then
   print_ff

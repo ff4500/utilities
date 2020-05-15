@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 ind="  "
-sep_ll="56"
+sep_ll="100"
+cdate=$(date '+%F')
 
 # Indention - for reuse
 # -----------------------------------------------
@@ -21,6 +22,18 @@ info(){
   indent; indent; echo -e "${bg_darkgrey_02}${ui_text_info} i ${reset} \c"
 }
 
+action(){
+  indent; indent; echo -e "${bg_darkgrey_02}${ui_text_info} > ${reset} \c"
+}
+
+action_title(){
+  indent; indent; echo -e "${bg_aqua}${fg_black} $1 ${reset}"
+}
+
+action_indent(){
+  indent; indent; indent; indent;
+}
+
 cmd(){
   # indent; indent; echo -e "${bg_darkgrey_02}   ${reset}"
   # echo;
@@ -30,6 +43,10 @@ cmd(){
 
 cmd_inline(){
   echo -e "${bg_black}${ui_text_cmd} \$ $1 ${reset}"
+}
+
+cmd_inline_noprompt(){
+  echo -e "${bg_black}${ui_text_cmd} $1 ${reset}"
 }
 
 sec_hl(){
@@ -85,7 +102,7 @@ check_ex(){
     echo; sleep 1
     mkdir ${base_dir}
   else
-    info; line "Base dir exists at: ${ui_text_cmd}${base_dir}${reset}"
+    info; line "Base dir exists at: \c"; cmd_inline_noprompt "${base_dir}"
     echo
   fi
 
@@ -95,7 +112,7 @@ check_ex(){
     echo; sleep 1
     mkdir ${source}
   else
-    info; line "Source dir exists at: ${ui_text_cmd}${source}${reset}"
+    info; line "Source dir exists at: \c"; cmd_inline_noprompt "${source}"
     echo
   fi
 
@@ -105,7 +122,7 @@ check_ex(){
     echo; sleep 1
     mkdir ${output}
   else
-    info; line "Output dir exists at: ${ui_text_cmd}${output}${reset}"
+    info; line "Output dir exists at: \c"; cmd_inline_noprompt "${output}"
     echo
   fi
 
@@ -115,7 +132,7 @@ check_ex(){
     echo; sleep 1
     mkdir ${base_dir}/_src && touch ${repo_list}
   else
-    info; line "A repository list exists at: ${ui_text_cmd}${repo_list}${reset}"
+    info; line "A repository list exists at: \c"; cmd_inline_noprompt "${repo_list}"
     echo
   fi
 
@@ -133,9 +150,9 @@ user_prompt_continue() {
   indent; indent; echo -e "${fg_lightgrey}\c"; read -r -p "Would you like to continue? $(color_yn)" response
   if [[ $response =~ (y|yes|Y|YES|yep|yup) ]]; then
     echo
-    info; line "You said YES";
+    info; line "You said YES. \c";
     sleep 1s;
-    line_2 "Moving on...";
+    line "Let's go!";
     echo
     sleep 1s;
     clear
@@ -147,7 +164,7 @@ user_prompt_continue() {
     line_i "${bg_darkpurple} Exiting... ${reset}";
     echo
     echo
-    sleep 2s;
+    sleep 1s;
     exit 0;
   fi
 }
@@ -162,14 +179,14 @@ repo_list_empty_check(){
   sec_hl "Checking for repositories:"
 
   if [ ! -s "${repo_list}" ]; then
-    alert_line "There aren't any repos defined in your list yet."; line_2 "Add them to ${fg_aqua}${repo_list}${reset}"; line_2 "and restart this script."
+    alert_line "There aren't any repos defined in your list yet."; line_2 "Add them to ${bg_black}${fg_aqua} ${repo_list} ${reset}"; line_2 "and restart this script."
     echo
     sep
     echo
     sleep 2s;
     exit 0;
   else
-    info; line "Here's what you have in you list now:"
+    info; line "Here's your list. The following repos will be processed:"
     echo -e "${fg_aqua}"
     cat ${repo_list} | sed 's/^/    /g'
     echo -e "${reset}"
@@ -177,43 +194,132 @@ repo_list_empty_check(){
   fi
 }
 
-# # Clone everything in repo_list to source folder
-# # -----------------------------------------------
-#
-# while read line; do
-#   #echo -e "git clone $line";
-#   git -C $source/ clone --quiet $line
-# done < ${repo_list}
-#
-#
-# # Archive repos
-# # -----------------------------------------------
-#
-# cd ${source}
-#
-# for dir in */
-# do
-#   base=$(basename "$dir")
-#   tar -czf "${base}.tar.gz" "$dir"
-# done
-#
-#
-# # Copy archive files to output folder
-# # -----------------------------------------------
-#
-# mv *.tar.gz ${output}
+github_clone() {
+  # Clone everything in repo_list to source folder
+  # -----------------------------------------------
+
+  while read line; do   
+
+    suffix=".git"
+    pre="${line##*/}"
+    pre=${pre%"${suffix}"}
+    reponame="${pre}"
+
+    echo
+    sep
+    echo
+
+    sec_hl "Processing ${fg_aqua}${reponame} ${reset}"
+    
+    if [ ! -d "${source}/${reponame}" ]; then
+      info; line "Repo directory doesn't exist. \c"; sleep 1; line "${fg_aqua}Creating it now.${reset}"; sleep 1;
+      mkdir "${source}/${reponame}";
+    else
+      info; line "Repo directory already exists. \c"; sleep 1; line "${fg_aqua}Deleting it and making a fresh copy.${reset}"; sleep 1;
+      rm -rf "${source}/${reponame}" && mkdir "${source}/${reponame}";
+    fi
+
+    echo
+    
+    # cd "${source}/${reponame}";
+    # ls -la;
+    # pwd
+
+    action_title "RUNNING";
+    echo
+
+    action; cmd_inline "git clone ${reponame}";
+    git -C "${source}/${reponame}/" clone -q $line;
+    
+    action; cmd_inline "git clone MIRROR ${reponame}";
+    git -C "${source}/${reponame}/" clone --mirror -q $line;
+    
+    echo
+
+    # Make a bundle file out of the mirror repo copy
+    # -----------------------------------------------
+    
+    action_title "MAKING";
+    echo
+
+    action; line "Preparing the bundle file for ${reponame}";
+    cd "${source}/${reponame}/${reponame}".git/;
+    git bundle create "${reponame}".bundle --all >> log 2>&1;
+
+    action; line "Moving the bundle file for ${reponame}";
+    mv "${reponame}".bundle ../;
+    
+    cd "${dir}"
+  done < ${repo_list}
+
+  echo
+  sep;
+  echo
+  info; line "Finished processing your repositories. \c"; sleep 1; line "Moving on to archiving...";
+  sleep 5s;
+  clear
+}
+
+archive() {
+  # Archive repos
+  # -----------------------------------------------
+  
+  echo
+  sep
+  echo
+  action_title "ARCHIVING";
+  echo
+  
+  cd "${source}"  
+
+  action; line "Making tar files. \c";
+
+  for dir in */
+  do
+    base=$(basename "$dir")
+    tar -czf "${base}_${cdate}.tar.gz" "$dir"
+  done
+  sleep 2s;
+  line "Finished.";
+  sleep 1s;
+  echo
+  sep
+  echo
+  
+}
+
+copy_archive(){
+  # Copy archive files to output folder
+  # -----------------------------------------------
+
+  action_title "MOVING FILES";
+  echo
+  
+  action; line "Moving all of the archived tar files. \c";
+  mv *.tar.gz ${output}
+  sleep 2s;
+  line "Finished.";
+  echo
+  sep
+  echo
+  sleep 1s;
+}
 
 
 # Cleanup
 # -----------------------------------------------
 
-zzz (){
+cleanup (){
   filelines="$(cat $repo_list)"
+
+  action_title "CLEANUP";
+  echo
+
   for line in $filelines; do
     suffix=".git"
     pre="${line##*/}"
     pre=${pre%"${suffix}"}
-    f="${output}/${pre}.tar.gz"
+    f="${output}/${pre}_${cdate}.tar.gz"
     if [ ! -f "$f" ]; then
       sep
       echo
@@ -227,14 +333,35 @@ zzz (){
       indent; echo -e "tar -czf $(echo "${pre}").tar.gz $(echo "${output}/")"
       echo
       sep
-    # else
-    #   echo -e "It's there! \c"
-    #   echo -e "${f}"
     fi
   done
+
+  action; line "Removing the source repo folders. \c";  
+  cd ${source} && rm -rf * && cd ../;
+  sleep 2s;
+  line "Finished.";
+  echo
+  sep
+  echo
+  sleep 3s;
+  clear
 }
 
-#zzz
+finished_msg() {  
+  echo
+  sep
+  echo
+  action_title "FINISHED";
+  echo
+  
+  info; line "Your archives are ready!"
+  echo
+  line_i "You can find them in \c"; cmd_inline_noprompt "${output}/";
+  echo
+  sep;
+  echo
+  sleep 3;
+}
 
 run() {
   titleblock
@@ -242,5 +369,9 @@ run() {
   prompt_continue
   clear
   repo_list_empty_check
-  echo -e "yay!"
+  github_clone
+  archive
+  copy_archive
+  cleanup
+  finished_msg
 }

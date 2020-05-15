@@ -1,3 +1,1 @@
-https://github.com/ff4500/startpage-gatsby.git
-https://github.com/ff4500/sh-start.git
-https://github.com/ff4500/jasonpitman.git
+
