@@ -361,17 +361,41 @@ finished_msg() {
   sep;
   echo
   sleep 3;
+  line_i "Now, we're going to move your archives to storage.";
+  line_i "Looks like that's here: \c"; cmd_inline_noprompt "${storage_dir}";
+  echo
+  user_prompt_continue;
+}
+
+move_to_storage(){
+  echo
+  sep
+  echo
+  action_title "MOVING TO STORAGE";
+  echo
+
+  action; line "Moving your files to your storage dir.";
+  echo -e "${fg_aqua}"
+  rsync -avzh -P "${base_dir}/" "${storage_dir}/" | sed 's/^/    /g'
+  echo -e "${reset}"
+  sleep 2s;
+  info; line "Finished.";
+  echo
+  sep;
+  echo
+  sleep 3;
 }
 
 run() {
-  titleblock
-  check_ex
-  prompt_continue
-  clear
-  repo_list_empty_check
-  github_clone
-  archive
-  copy_archive
-  cleanup
+  # titleblock
+  # check_ex
+  # prompt_continue
+  # clear
+  # repo_list_empty_check
+  # github_clone
+  # archive
+  # copy_archive
+  # cleanup
   finished_msg
+  move_to_storage
 }
