@@ -387,15 +387,15 @@ move_to_storage(){
 }
 
 run() {
-  # titleblock
-  # check_ex
-  # prompt_continue
-  # clear
-  # repo_list_empty_check
-  # github_clone
-  # archive
-  # copy_archive
-  # cleanup
+  titleblock
+  check_ex
+  prompt_continue
+  clear
+  repo_list_empty_check
+  github_clone
+  archive
+  copy_archive
+  cleanup
   finished_msg
   move_to_storage
 }
