@@ -13,7 +13,7 @@ base_dir="$HOME/Desktop/repo_archive"
 source_repo_dir="repos"
 output_dir="archive"
 repo_list="${base_dir}/_src/repo_list.txt"
-storage_dir="/Volumes/Dump/Backups/ff4500/github"
+storage_dir="/Volumes/Dump/Backups/BaM/github"
 
 # Other config things
 # ------------------------------------------------------------------------------
