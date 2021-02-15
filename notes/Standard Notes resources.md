@@ -12,7 +12,9 @@ Below are a bunch of resources for ways to make Standard Notes integrate with ot
 
 Themes to take a look at. Might be work in progress, but worth checking out nonetheless.
 
-**SN One Dark** - [github.com/matta9001/sn-onedark](https://github.com/matta9001/sn-onedark) - A dark color scheme for Standard Notes based on the One Dark syntax theme for the Atom text editor. 
+**SN One Dark** - [github.com/matta9001/sn-onedark](https://github.com/matta9001/sn-onedark) - A dark color scheme for Standard Notes based on the One Dark syntax theme for the Atom text editor.
+
+**Dracula** - [github.com/cameronldn/sn-theme-dracula](https://github.com/cameronldn/sn-theme-dracula) - Dracula theme for Standard Notes
 
 ## Editors
 
