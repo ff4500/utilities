@@ -6,6 +6,8 @@ Below are a bunch of resources for ways to make Standard Notes integrate with ot
 
 **Awesome Standard Notes** - [github.com/jonhadfield/awesome-standard-notes](https://github.com/jonhadfield/awesome-standard-notes) - A curated list of tools and information relating to Standard Notes
 
+**standardnotes-fs** - [github.com/tannercollin/standardnotes-fs](https://github.com/tannercollin/standardnotes-fs) -  Mount your Standard Notes as a filesystem
+
 ## Themes
 
 Themes to take a look at. Might be work in progress, but worth checking out nonetheless.
