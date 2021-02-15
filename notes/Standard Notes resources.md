@@ -14,7 +14,7 @@ Themes to take a look at. Might be work in progress, but worth checking out none
 
 **SN One Dark** - [github.com/matta9001/sn-onedark](https://github.com/matta9001/sn-onedark) - A dark color scheme for Standard Notes based on the One Dark syntax theme for the Atom text editor.
 
-**Dracula** - [github.com/cameronldn/sn-theme-dracula](https://github.com/cameronldn/sn-theme-dracula) - Dracula theme for Standard Notes
+**Dracula** - [github.com/dracula/standard-notes](https://github.com/dracula/standard-notes) - Dracula theme for Standard Notes
 
 ## Editors
 
